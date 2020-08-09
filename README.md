@@ -35,3 +35,4 @@ docker ps
 - Restaurants pulled from database instead of text files would obviously be better.
 - Environment variables for all configuration options preferred.
 - One-off container building required to run services should be streamlined as well.
+- Update to mailgun sendmail

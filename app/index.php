@@ -43,9 +43,10 @@
 	{
 		if(isset($_POST['choice']))
 		{
-			//expire in 5 days
-			$expire = time()+432000;
-			setcookie("user", "voted", $expire);
+			// 2020: needed slight refactor --- functionality change to not lock out if PIN failed
+			// expire in 5 days
+			// $expire = time()+432000;
+			// setcookie("user", "voted", $expire);
 
 			// connect to database
 			$pass = md5("oursecret");
@@ -86,6 +87,13 @@
 				if (! $stmt->execute([$choice, $pin]))
 				{
 					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>";
+				}
+				else 
+				{
+					// expire in 5 days
+					// set cookie to only vote once
+					$expire = time()+432000;
+					setcookie("user", "voted", $expire);
 				}
 			}
 			// select count of restaurants

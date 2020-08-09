@@ -138,9 +138,9 @@
     	<h3>Place vote for lunch location:</h3>
         <div class="meta">Locations have been generated randomly for an exciting lunch every time!</div><br />
         <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>"><table class="lunchtable"><tr>
-        	<td rowspan="2"><input type="radio" name="choice" value="House of Lee" />House of Lee                                              
-        	<br /><input type="radio" name="choice" value="Village Inn" />Village Inn                                              
+        	<td rowspan="2"><input type="radio" name="choice" value="Arbys" />Arbys                                              
         	<br /><input type="radio" name="choice" value="McDonalds" />McDonalds                                              
+        	<br /><input type="radio" name="choice" value="KFC" />KFC                                              
                 </td><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;Pin: <input name="pin" type="password" maxlength="32"/>
 		</td></tr><tr><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit Lunch Vote" />
         </td></tr></table></form>

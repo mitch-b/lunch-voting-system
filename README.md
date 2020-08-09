@@ -15,6 +15,7 @@ https://www.vultr.com/docs/deploy-a-php-application-using-docker-compose
 
 docker build -t lvs-php php/
 docker build -t lvs-nginx nginx/
+docker build -t lvs-cron cron/
 cd app/
 docker-compose up -d
 
@@ -40,7 +41,7 @@ docker ps
   ```
 
 ## To Do
-- Still have not hooked up Cron jobs to refresh restaurant choices.
+- Update cronjob to appropriate scripts/timings
 - Restaurants pulled from database instead of text files would obviously be better.
 - Environment variables for all configuration options preferred.
 - One-off container building required to run services should be streamlined as well.

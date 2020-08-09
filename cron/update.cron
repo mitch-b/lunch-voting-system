@@ -1,0 +1,1 @@
+* * * * * curl lvs-web/start.php > /app/cron-out.txt

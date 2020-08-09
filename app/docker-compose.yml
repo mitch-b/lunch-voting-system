@@ -28,3 +28,8 @@ services:
       MYSQL_PASSWORD: lvs
     working_dir: /app
     restart: always
+  lvs-cron:
+    image: lvs-cron
+    environment:
+        - CRON_LOGLEVEL=7
+    restart: always

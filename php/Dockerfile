@@ -8,3 +8,9 @@ RUN apk update --no-cache \
     && pear install Mail
 
 WORKDIR /app
+
+# crond: alpine
+COPY update.cron /var/spool/cron/crontabs/update.cron
+
+RUN chmod 0644 /var/spool/cron/crontabs/update.cron
+# RUN crontab update.cron

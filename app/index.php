@@ -18,13 +18,23 @@
 		echo "<div id='vote'><p>You have already voted. Thank you for your participation.</p>";
 		echo "Current results: <hr />";
 		// connect to database
+		
+		// 2020: needed slight refactor
+		// $sql2 = "SELECT DISTINCT name FROM restaurant";
+		// $result2 = mysql_query($sql2);
+		// while($row = mysql_fetch_assoc($result2))
 		$sql2 = "SELECT DISTINCT name FROM restaurant";
-		$result2 = mysql_query($sql2);
-		while($row = mysql_fetch_assoc($result2))
+		$result2 = $db->query($sql2);
+		while($row = $result2->fetch(PDO::FETCH_ASSOC))
 		{
-			$sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
-			$result3 = mysql_query($sql3);
-			$num = mysql_num_rows($result3);
+			// 2020: needed slight refactor
+			// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
+			// $result3 = mysql_query($sql3);
+			// $num = mysql_num_rows($result3);
+
+			$sql3 = "SELECT * FROM restaurant WHERE name = " . $db->quote($row['name']);
+			$result3 = $db->query($sql3);
+			$num = $result3->rowCount();
 			echo $row['name'] . " : " . $num . "<br />";
 		}
 		echo "<p /></div></body></html>";
@@ -39,8 +49,14 @@
 
 			// connect to database
 			$pass = md5("oursecret");
-			$result = mysql_query("SELECT id FROM restaurant WHERE pin = '$pass'");
-			if(mysql_num_rows($result)>0)
+			
+			// 2020: needed slight refactor
+			// $result = mysql_query("SELECT id FROM restaurant WHERE pin = '$pass'");
+			// if(mysql_num_rows($result)>0)
+
+			$query = "SELECT id FROM restaurant WHERE pin = " . $db->quote($pass);
+			$result = $db->query($query);
+			if($result->rowCount()>0)
 			{
 				echo "
 				<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -58,10 +74,19 @@
 			}
 			else
 			{
-                $choice = mysql_real_escape_string($_POST['choice']);
-		       	$pin = md5($_POST['pin']);
-				$sql = "INSERT INTO restaurant (name,pin) VALUES ('$choice','$pin')";
-				$result = mysql_query($sql) or die("<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>");
+				$pin = md5($_POST['pin']);
+
+				// 2020: needed slight refactor
+				// $choice = mysql_real_escape_string($_POST['choice']);
+				// $sql = "INSERT INTO restaurant (name,pin) VALUES ('$choice','$pin')";
+				// $result = mysql_query($sql) or die("<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>");
+
+				$query = "INSERT INTO restaurant (name,pin) VALUES (?,?)";
+				$stmt = $db->prepare($query);
+				if (! $stmt->execute([$choice, $pin]))
+				{
+					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>";
+				}
 			}
 			// select count of restaurants
 			echo "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -75,13 +100,24 @@
 				<div id=\"container\">";
 				include('./left_column.php');
 			echo "<div id='vote'><h3>View Results</h3>";
+
+			// 2020: needed slight refactor
+			// $sql2 = "SELECT DISTINCT name FROM restaurant";
+			// $result2 = mysql_query($sql2);
+			// while($row = mysql_fetch_assoc($result2))
+
 			$sql2 = "SELECT DISTINCT name FROM restaurant";
-			$result2 = mysql_query($sql2);
-			while($row = mysql_fetch_assoc($result2))
+			$result2 = $db->query($sql2);
+			while($row = $result2->fetch(PDO::FETCH_ASSOC))
 			{
-				$sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
-				$result3 = mysql_query($sql3);
-				$num = mysql_num_rows($result3);
+				// 2020: needed slight refactor
+				// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
+				// $result3 = mysql_query($sql3);
+				// $num = mysql_num_rows($result3);
+
+				$sql3 = "SELECT * FROM restaurant WHERE name = " . $db->quote($row['name']);
+				$result3 = $db->query($sql3);
+				$num = $result3->rowCount();
 				echo $row['name'] . " : " . $num . "<br />";
 			}
 			echo "<p /><a href='manage.php' class='meta_right'>manage lunch system</a></div></body></html>";

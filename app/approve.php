@@ -7,15 +7,29 @@
 	if($_GET['pass'] == "oursecret")
 	{
 		$id = $_GET['id'];
-		$result = mysql_query("SELECT name, email FROM users WHERE id = '$id'");
-		$row = mysql_fetch_assoc($result);
+
+		// 2020: needed slight refactor
+		// $result = mysql_query("SELECT name, email FROM users WHERE id = '$id'");
+		// $row = mysql_fetch_assoc($result);
+
+		$query = "SELECT name, email FROM users WHERE id = " . $db->quote($id);
+		$result = $db->query($query);
+		$row = $result->fetch(PDO::FETCH_ASSOC);
+
 		$name = $row['name'];
 		$email = $row['email'];
 		if($action == "approve")
 		{
 			$password = $_POST['confirmation'];
 			$pass = md5($password);
-			mysql_query("UPDATE users SET status = 'APPROVED', password = '$pass'  WHERE id = '$id'");
+			
+			// 2020: needed slight refactor
+			// mysql_query("UPDATE users SET status = 'APPROVED', password = '$pass'  WHERE id = '$id'");
+
+			$query = "UPDATE users SET status=?, password=? WHERE id=?";
+			$stmt = $db->prepare($query);
+			$stmt->execute(['APPROVED', $pass, $id]);
+
 			$subject = "PIN Approved";
 			$from = "from: PIN Service Request <lunch@mitchbarry.com>";
 			$msg = "Your request for a PIN is approved. Set your pin at http://www.mitchbarry.com/lunch/setpin.php?id=" . $id . "&confirmation=" . $password;
@@ -24,7 +38,13 @@
 		}
 		else if($action == "deny")
 		{
-			mysql_query("DELETE FROM users WHERE id = '$id'");
+			// 2020: needed slight refactor
+			// mysql_query("DELETE FROM users WHERE id = '$id'");
+			
+			$query = "DELETE FROM users WHERE id=?";
+			$stmt = $db->prepare($query);
+			$stmt->execute([$id]);
+
 			$subject = "PIN Denied";
 			$from = "from: PIN Service Request <lunch@mitchbarry.com";
 			$msg = "Your request for a PIN has been denied. Abuse of the system is not tolerated. If you feel this is a mistake, ";

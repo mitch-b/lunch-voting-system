@@ -29,6 +29,8 @@ docker ps
 - The _Lunch Voting System_ had some integration with a CMS system hosted on mitchbarry.com - administrators of the _Lunch Voting System_ needed a user created in that system. To self-contain, that user administration has moved to the same mysql database that the application depends on. 
   - Admin User: `admin`
   - Admin Pass: `admin`
+  - Fun non-admin User: `user`
+  - Fun non-admin Pass: `user`
 - Still have not hooked up Cron jobs to refresh restaurant choices.
 - Restaurants pulled from database instead of text files would obviously be better.
 - Environment variables for all configuration options preferred.

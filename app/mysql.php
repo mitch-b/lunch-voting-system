@@ -13,8 +13,8 @@
 
 $dbhost = 'lvs-data';
 $dbname = 'lunch_voting_system';
-$username = 'root';
-$password = 'root';
+$username = 'lvs';
+$password = 'lvs';
 
 $db = new PDO("mysql:host=" . $dbhost . ";dbname=" . $dbname, $username, $password);
 

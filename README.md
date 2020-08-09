@@ -36,3 +36,13 @@ docker ps
 - Environment variables for all configuration options preferred.
 - One-off container building required to run services should be streamlined as well.
 - Update to mailgun sendmail
+
+## Debugging
+
+To get into mysql container host to run `mysql` tool and poke around, you'll need to get the container id. 
+
+```bash
+docker ps
+# assume b7a9f5eb6b85 is the CONTAINER_ID of the lvs-data instance
+docker exec -it b7a sh
+```

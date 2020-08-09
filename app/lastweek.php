@@ -6,6 +6,6 @@
 <title>Lunch Voting System | powered by mitchbarry.com</title>
 </head>
 <body>
-<div id="container"><?php include("./left_column.php"); ?>
+<div id="container"><?php include("./include/left_column.php"); ?>
 <div id='vote'><p>Polling period has expired. Wait until 7AM CST Friday.</p></div>
 <a href='manage.php' class='meta_right'>manage lunch system</a></div></body></html>

@@ -14,7 +14,7 @@
 		</head>
 		<body>
 		<div id=\"container\">";
-		include('./left_column.php');
+		include('./include/left_column.php');
 		echo "<div id='vote'><p>You have already voted. Thank you for your participation.</p>";
 		echo "Current results: <hr />";
 		// connect to database
@@ -68,7 +68,7 @@
 				</head>
 				<body>
 				<div id=\"container\">";
-				include('./left_column.php');
+				include('./include/left_column.php');
 				echo "<div id='vote'><p>This weeks results have been overriden due to special circumstances. Your vote will not count.</p><p /><a href='manage.php' class='meta_right'>manage lunch system</a>
 </div></body></html>";
 			}
@@ -98,7 +98,7 @@
 				</head>
 				<body>
 				<div id=\"container\">";
-				include('./left_column.php');
+				include('./include/left_column.php');
 			echo "<div id='vote'><h3>View Results</h3>";
 			
 			// 2020: needed slight refactor
@@ -133,7 +133,7 @@
 </head>
 <body>
 <div id="container">
-	<?php include('./left_column.php'); ?>
+	<?php include('./include/left_column.php'); ?>
 	<div id="vote">
     	<h3>Place vote for lunch location:</h3>
         <div class="meta">Locations have been generated randomly for an exciting lunch every time!</div><br />

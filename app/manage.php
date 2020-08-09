@@ -12,7 +12,7 @@ session_start();
 
 <body>
 	<div id="container">
-		<?php include("./left_column.php"); ?>
+		<?php include("./include/left_column.php"); ?>
 		<div id='vote'>
 			<?php
 			$auth = 0;

@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS `account` (
 CREATE TABLE users (
     id INT AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
     frequency VARCHAR(1) NOT NULL DEFAULT 'W',
     status VARCHAR(20) DEFAULT 'NOT_SETUP',
     PRIMARY KEY (`id`)

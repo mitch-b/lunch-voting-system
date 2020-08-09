@@ -9,5 +9,5 @@
     $run = "./restaurant.pl";
 	exec($run);
 	echo nl2br("done\n\n");
-	echo "<a href='http://lvs.mitchbarry.com/lunch/'>vote for lunch</a>";
+	echo "<a href='https://lvs.mitchbarry.com/'>vote for lunch</a>";
 ?>

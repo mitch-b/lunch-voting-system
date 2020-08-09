@@ -30,7 +30,7 @@ if ($_GET['pass'] == "oursecret") {
 
 		$subject = "PIN Approved";
 		$from = "from: PIN Service Request <lunch@mg.mitchbarry.com>";
-		$msg = "Your request for a PIN is approved. Set your pin at http://lvs.mitchbarry.com/setpin.php?id=" . $id . "&confirmation=" . $password;
+		$msg = "Your request for a PIN is approved. Set your pin at https://lvs.mitchbarry.com/setpin.php?id=" . $id . "&confirmation=" . $password;
 		mail($email, $subject, $msg, $from);
 		header("Location: approve.php?action=approved");
 	} else if ($action == "deny") {

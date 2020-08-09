@@ -25,7 +25,7 @@
 		// while($row = mysql_fetch_assoc($result2))
 		$sql2 = "SELECT DISTINCT name FROM restaurant";
 		$result2 = $db->query($sql2);
-		while($row = $result2->fetch(PDO::FETCH_ASSOC))
+		while($result2 && $row = $result2->fetch(PDO::FETCH_ASSOC))
 		{
 			// 2020: needed slight refactor
 			// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
@@ -43,10 +43,9 @@
 	{
 		if(isset($_POST['choice']))
 		{
-			// 2020: needed slight refactor --- functionality change to not lock out if PIN failed
-			// expire in 5 days
-			// $expire = time()+432000;
-			// setcookie("user", "voted", $expire);
+			//expire in 5 days
+			$expire = time()+432000;
+			setcookie("user", "voted", $expire);
 
 			// connect to database
 			$pass = md5("oursecret");
@@ -55,9 +54,9 @@
 			// $result = mysql_query("SELECT id FROM restaurant WHERE pin = '$pass'");
 			// if(mysql_num_rows($result)>0)
 
-			$query = "SELECT id FROM restaurant WHERE pin = " . $db->quote($pass);
+			$query = "SELECT `name` FROM restaurant WHERE pin = " . $db->quote($pass);
 			$result = $db->query($query);
-			if($result->rowCount()>0)
+			if($result && $result->rowCount()>0)
 			{
 				echo "
 				<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -75,7 +74,7 @@
 			}
 			else
 			{
-				$pin = md5($_POST['pin']);
+                $pin = md5($_POST['pin']);
 
 				// 2020: needed slight refactor
 				// $choice = mysql_real_escape_string($_POST['choice']);
@@ -84,16 +83,9 @@
 
 				$query = "INSERT INTO restaurant (name,pin) VALUES (?,?)";
 				$stmt = $db->prepare($query);
-				if (! $stmt->execute([$choice, $pin]))
+				if (! $stmt->execute([$_POST['choice'], $pin]))
 				{
-					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>";
-				}
-				else 
-				{
-					// expire in 5 days
-					// set cookie to only vote once
-					$expire = time()+432000;
-					setcookie("user", "voted", $expire);
+					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p> Error Code:" . $stmt->errorCode() . print_r($stmt->errorInfo());
 				}
 			}
 			// select count of restaurants
@@ -108,7 +100,7 @@
 				<div id=\"container\">";
 				include('./include/left_column.php');
 			echo "<div id='vote'><h3>View Results</h3>";
-
+			
 			// 2020: needed slight refactor
 			// $sql2 = "SELECT DISTINCT name FROM restaurant";
 			// $result2 = mysql_query($sql2);
@@ -116,7 +108,7 @@
 
 			$sql2 = "SELECT DISTINCT name FROM restaurant";
 			$result2 = $db->query($sql2);
-			while($row = $result2->fetch(PDO::FETCH_ASSOC))
+			while($result2 && $row = $result2->fetch(PDO::FETCH_ASSOC))
 			{
 				// 2020: needed slight refactor
 				// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
@@ -146,9 +138,9 @@
     	<h3>Place vote for lunch location:</h3>
         <div class="meta">Locations have been generated randomly for an exciting lunch every time!</div><br />
         <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>"><table class="lunchtable"><tr>
-        	<td rowspan="2"><input type="radio" name="choice" value="Godfathers Pizza" />Godfathers Pizza                                              
-        	<br /><input type="radio" name="choice" value="Buffalo Wild Wings" />Buffalo Wild Wings                                              
-        	<br /><input type="radio" name="choice" value="Applebees" />Applebees                                              
+        	<td rowspan="2"><input type="radio" name="choice" value="House of Lee" />House of Lee                                              
+        	<br /><input type="radio" name="choice" value="Village Inn" />Village Inn                                              
+        	<br /><input type="radio" name="choice" value="McDonalds" />McDonalds                                              
                 </td><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;Pin: <input name="pin" type="password" maxlength="32"/>
 		</td></tr><tr><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit Lunch Vote" />
         </td></tr></table></form>
@@ -160,9 +152,9 @@
 		// $result = mysql_query("SELECT name FROM restaurant WHERE pin = '$pass'");
 		// if(mysql_num_rows($result)>0)
 
-		$query = "SELECT name FROM restaurant WHERE pin = " . $db->quote($pass);
+		$query = "SELECT `name` FROM restaurant WHERE pin = " . $db->quote($pass);
 		$result = $db->query($query);
-		if($result->rowCount()>0)
+		if($result && $result->rowCount()>0)
 		{
 			// 2020: needed slight refactor
 			// $row = mysql_fetch_assoc($result);

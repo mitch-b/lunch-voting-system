@@ -14,11 +14,13 @@
 		echo 'Exception -> ';
 		var_dump($e->getMessage());
 	}
-	
+
 	echo nl2br("done\n");
 	echo "updating list.............";
-    $run = "./restaurant.pl";
-	exec($run);
+    $run = "perl ./restaurant.pl";
+	$output = '';
+	exec($run, $output);
+	echo print_r($output);
 	echo nl2br("done\n\n");
-	echo "<a href='https://lvs.mitchbarry.com/'>vote for lunch</a>";
+	echo "<a href='http://localhost:8080/'>vote for lunch</a>";
 ?>

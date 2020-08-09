@@ -44,7 +44,7 @@ if ($action == "add") {
 		$to = "mitch.barry+lvs@gmail.com";
 		$from = "from: Pin Verification Service <lunch@mg.mitchbarry.com>";
 		$subject = "PIN Registration Approval Needed for " . $name;
-		$msg = "A PIN request has been placed by " . $name . ".\n\nPlease go to https://lvs.mitchbarry.com/approve.php?id=" . $row['id'] . "&pass=oursecret to approve/deny request.";
+		$msg = "A PIN request has been placed by " . $name . ".\n\nPlease go to http://localhost:8080/approve.php?id=" . $row['id'] . "&pass=oursecret to approve/deny request.";
 		mail($to, $subject, $msg, $from);
 		header("Location: register.php?action=pending");
 	}

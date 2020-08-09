@@ -25,7 +25,7 @@
 		// while($row = mysql_fetch_assoc($result2))
 		$sql2 = "SELECT DISTINCT name FROM restaurant";
 		$result2 = $db->query($sql2);
-		while($row = $result2->fetch(PDO::FETCH_ASSOC))
+		while($result2 && $row = $result2->fetch(PDO::FETCH_ASSOC))
 		{
 			// 2020: needed slight refactor
 			// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
@@ -54,9 +54,9 @@
 			// $result = mysql_query("SELECT id FROM restaurant WHERE pin = '$pass'");
 			// if(mysql_num_rows($result)>0)
 
-			$query = "SELECT id FROM restaurant WHERE pin = " . $db->quote($pass);
+			$query = "SELECT `name` FROM restaurant WHERE pin = " . $db->quote($pass);
 			$result = $db->query($query);
-			if($result->rowCount()>0)
+			if($result && $result->rowCount()>0)
 			{
 				echo "
 				<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
@@ -83,9 +83,9 @@
 
 				$query = "INSERT INTO restaurant (name,pin) VALUES (?,?)";
 				$stmt = $db->prepare($query);
-				if (! $stmt->execute([$choice, $pin]))
+				if (! $stmt->execute([$_POST['choice'], $pin]))
 				{
-					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p>";
+					echo "<p><em>Failed to place your vote.</em></p><p>Either you have an invalid PIN or you have already voted.</p> Error Code:" . $stmt->errorCode() . print_r($stmt->errorInfo());
 				}
 			}
 			// select count of restaurants
@@ -108,7 +108,7 @@
 
 			$sql2 = "SELECT DISTINCT name FROM restaurant";
 			$result2 = $db->query($sql2);
-			while($row = $result2->fetch(PDO::FETCH_ASSOC))
+			while($result2 && $row = $result2->fetch(PDO::FETCH_ASSOC))
 			{
 				// 2020: needed slight refactor
 				// $sql3 = "SELECT * FROM restaurant WHERE name='" . mysql_real_escape_string($row['name']) . "'";
@@ -152,9 +152,9 @@
 		// $result = mysql_query("SELECT name FROM restaurant WHERE pin = '$pass'");
 		// if(mysql_num_rows($result)>0)
 
-		$query = "SELECT name FROM restaurant WHERE pin = " . $db->quote($pass);
+		$query = "SELECT `name` FROM restaurant WHERE pin = " . $db->quote($pass);
 		$result = $db->query($query);
-		if($result->rowCount()>0)
+		if($result && $result->rowCount()>0)
 		{
 			// 2020: needed slight refactor
 			// $row = mysql_fetch_assoc($result);

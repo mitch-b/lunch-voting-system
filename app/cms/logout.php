@@ -1,5 +1,5 @@
 <?php
 	session_start();
 	session_destroy();
-	header("Location: https://lvs.mitchbarry.com/");
+	header("Location: http://localhost:8080/");
 ?>

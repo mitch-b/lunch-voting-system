@@ -4,7 +4,7 @@
     <body style=\"font-family:Corbel,Tahoma,Arial;\">
     <div style=\"padding:15px;\">
         <center><b>Lunch Reminder</b></center>
-        <p>Please head to <a href='https://lvs.mitchbarry.com'>the lunch page</a> to vote for lunch.</p>
+        <p>Please head to <a href='http://localhost:8080'>the lunch page</a> to vote for lunch.</p>
 	<p>You have until 12:00PM Central to complete this action.</p>
 	<p><em><strong>Reminder:</strong></em> Don't forget to complete your CATS for the week!</p>
     </div>

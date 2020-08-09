@@ -31,6 +31,15 @@ docker ps
   - Admin Pass: `admin`
   - Fun non-admin User: `user`
   - Fun non-admin Pass: `user`
+- I had issues with `/start.php` not writing the `index.php` file out. 
+  ```bash
+  # security be damned
+  chmod 777 ./app/index.php
+  chmod 777 ./app/lastweek.php
+  chmod 777 ./app/restaurant.pl
+  ```
+
+## To Do
 - Still have not hooked up Cron jobs to refresh restaurant choices.
 - Restaurants pulled from database instead of text files would obviously be better.
 - Environment variables for all configuration options preferred.
@@ -46,3 +55,9 @@ docker ps
 # assume b7a9f5eb6b85 is the CONTAINER_ID of the lvs-data instance
 docker exec -it b7a sh
 ```
+
+## Schema
+
+View [00-init.sql](./app/sql/00-init.sql) to see database schema. 
+
+To populate your own test data, update [01-seed.sql](./app/sql/01-seed.sql).

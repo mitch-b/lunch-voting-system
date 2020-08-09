@@ -37,7 +37,7 @@ if ($stmt->rowCount() == 1) {
 	$stmt = $db->prepare($query);
 	$stmt->execute([$_SERVER['REMOTE_ADDR'], $username]);
 
-	header("location: https://lvs.mitchbarry.com/");
+	header("location: http://localhost:8080/");
 } else {
 	echo "wrong username/password";
 }

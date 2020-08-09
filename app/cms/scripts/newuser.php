@@ -24,17 +24,21 @@ $permission = $_POST['roleMenu'];
 			if ($username != "" && $password != "" && $confirm != "" && $password == $confirm) {
 				if ($password == $confirm) {
 					$password = md5($password);
-					$query = "INSERT INTO users (username,password) VALUES (?,?)";
+					$query = "INSERT INTO account (username,password,ip) VALUES (?,?,?)";
 					$stmt = $db->prepare($query);
 					try {
-						$stmt->execute([$username, $password]);
-						echo "User <strong>$username</strong> created successfully.";
+						if ($stmt->execute([$username, $password, ''])) {
+							echo "User <strong>$username</strong> created successfully.";
+						}
+						else {
+							throw new Exception('insert failed: '.$query);
+						}
 					} catch (Exception $e) {
-						echo 'Failed to insert user.<br />Query: $sql<br /><br />Exception -> ';
+						echo 'Failed to insert user.<br /><br />Exception -> ';
 						var_dump($e->getMessage());
 					}
 
-					$query = "SELECT user_id FROM users WHERE username=" . $db->quote($username);
+					$query = "SELECT user_id FROM account WHERE username=" . $db->quote($username);
 					$result = $db->query($query);
 					if ($result->rowCount() > 0) {
 						$data = $result->fetch(PDO::FETCH_ASSOC);
@@ -52,7 +56,7 @@ $permission = $_POST['roleMenu'];
 							}
 						}
 					} else {
-						echo "Failed to pull user_id.";
+						echo " Failed to pull user_id.";
 					}
 				} else {
 					echo "Error: Passwords do not match.";

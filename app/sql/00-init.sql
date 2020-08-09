@@ -5,10 +5,9 @@ GRANT ALL PRIVILEGES ON lunch_voting_system.* TO 'lvs'@'localhost' IDENTIFIED BY
 USE lunch_voting_system;
 
 CREATE TABLE restaurant (
-    id INT(11) AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    pin CHAR(32) NOT NULL,
-    PRIMARY KEY (`id`)
+    `pin` CHAR(32) NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
+    PRIMARY KEY (`pin`)
 );
 
 -- ported from mitchbarry.cms "users" now called 'account'
@@ -23,20 +22,22 @@ CREATE TABLE IF NOT EXISTS `account` (
 
 -- frequency is 'M' monthly; 'W' weekly;
 CREATE TABLE users (
-    id INT AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL,
-    frequency VARCHAR(1) NOT NULL DEFAULT 'W',
-    status VARCHAR(20) DEFAULT 'NOT_SETUP',
+    `id` INT AUTO_INCREMENT,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL,
+    `password` VARCHAR(255) DEFAULT NULL,
+    `frequency` VARCHAR(1) NOT NULL DEFAULT 'W',
+    `status` VARCHAR(20) DEFAULT 'NOT_SETUP',
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE pins (
-    pin VARCHAR(255) NOT NULL,
+    `pin` VARCHAR(255) NOT NULL,
     PRIMARY KEY (`pin`)
 );
 
 CREATE TABLE groups (
-    user_id INT(11),
-    group_name VARCHAR(100) NOT NULL,
-    PRIMARY KEY (`user_id`)
+    `user_id` INT(11),
+    `group_name` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`user_id`, `group_name`)
 );

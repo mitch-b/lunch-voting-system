@@ -9,9 +9,10 @@ VALUES
 
 INSERT INTO `lunch_voting_system`.`groups` (`user_id`, `group_name`) 
 VALUES
+    (1, 'administrator'),
     (1, 'lvs_admin'),
     (2, 'lvs_standard');
 
-INSERT INTO `lunch_voting_system`.`users` (`email`, `frequency`, `status`)
+INSERT INTO `lunch_voting_system`.`users` (`name`, `email`, `frequency`, `status`)
 VALUES 
-    ('mitch.barry+lvs@gmail.com', 'W', 'ACTIVE')
+    ('Mitchell Barry', 'mitch.barry+lvs@gmail.com', 'W', 'ACTIVE')

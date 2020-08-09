@@ -23,7 +23,7 @@
 		$logged_in = true;
 	else
 	{
-		header("location: " . serverUrl() . "/cms/login.php");
+		header("location: http://localhost:8080/cms/login.php");
 	}
 
 ?>

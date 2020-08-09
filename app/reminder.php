@@ -12,6 +12,7 @@
 </html>
 ";
 	require_once('mysql.php');
+	
 	$days = 7;
 	$thismonth = date("M", time());
     $nextmonth = date("M", time()+($days*24*60*60));
@@ -39,8 +40,15 @@
 	
 	function get_emails($sql)
 	{
-		$result = mysql_query($sql) or die(mysql_error());
-		while($data = mysql_fetch_assoc($result))
+		// 2020: needed slight refactor
+		// $result = mysql_query($sql) or die(mysql_error());
+		// while($data = mysql_fetch_assoc($result))
+		
+		global $db;
+		$emls = '';
+
+		$result = $db->query($sql);
+		while($data = $result->fetch(PDO::FETCH_ASSOC))
 		{
 			if($emls != ''){
 				$emls .= ", ";
@@ -50,5 +58,3 @@
 		$emls .= "\r\n";
 		return $emls;
 	}
-
-?>

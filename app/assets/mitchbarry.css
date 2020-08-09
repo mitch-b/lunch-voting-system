@@ -1,0 +1,169 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	font-family:Corbel, Verdana, Geneva, sans-serif;
+}
+a {
+	text-decoration:none;
+	color:#096;
+	font-weight:bold;
+}
+a:hover {
+}
+img {
+    border-style:none;
+}
+#container {
+	width:1010px;
+	margin:auto;
+}
+#session {
+	text-align:right;
+}
+#left_column {
+	width:220px;
+	float:left;
+	padding:15px;
+	height:700px;
+}
+#leftspacer {
+	min-height:100px;	
+}
+#center_column {
+	width:470px;
+	float:left;
+	padding:15px;
+	padding-top:25px;
+	height:700px;
+}
+#center_column_file {
+	width:730px;
+	float:left;
+	padding:15px;
+	padding-top:25px;
+	height:700px;
+}
+#vote {
+	width:695px;
+	float:left;
+	padding:15px;
+	padding-top:25px;
+    border: 1px solid #ccc;
+	margin-top:30px;
+	margin-left:30px;
+    background: #ece9d8;
+    /*padding: 8px;*/
+    display:block;
+}
+.lunchtable td {
+	width:330px;
+}
+.login td {
+	text-align:right;
+	padding-left:25px;
+}
+.longcell {
+	width:175px;
+	border-right:1px solid black;
+	padding-right:25px;
+}
+#votefooter {
+	width:100%;
+	text-align:right;
+	font-size:.9em;
+}
+#right_column {
+	width:220px;
+	float:left;
+	padding:15px;
+	padding-top:25px;
+	height:700px;
+}
+#jumpto
+{
+	background-color:#EEE;
+	font-size:12px;
+	padding:10px;
+}
+#lunch h4 {
+	background-color:#CCC;
+	padding:5px;
+}
+#footer {
+}
+#logo {
+}
+#navigation {
+}
+#links {
+}
+.right_align {
+	float:right;
+}
+.highlight{
+	background-color:#CCC;
+	cursor:hand; 
+	cursor:pointer;
+}
+dd {
+	background-color:#DFDFDF;
+	padding:15px;
+}
+dt {
+	padding:5px;
+}
+.title {
+	font-size:large;
+	font-weight:bold;
+}
+.meta {
+	font-size:small;
+	font-style:italic;
+	margin-top:-17px;
+}
+.main {
+	padding-left:15px;
+}
+.date {
+	text-align:right;
+	font-size:small;
+	font-style:italic;
+	margin-top:-10px;
+}
+.center {
+	text-align:center;
+}
+/* row0 and row1 for dynamic table creation */
+.row0 {
+	background-color:white;
+}
+.row1 {
+	background-color:#CCC;
+}
+pre {
+   display: block;
+   margin: 2em 0;
+   white-space: pre;
+   overflow: auto;
+   width: 690px;
+   line-height: 1.4;
+   border: 1px solid #ccc;
+   background: #ece9d8;
+   padding: 8px;
+}
+
+/* JS: adding CODE captions */
+pre.JS {
+   margin-top: 0;
+}
+.JScodeCaption {
+   margin-top: 2em;
+   color: #999;
+   font: .9em "Verdana", sans-serif;
+   padding-bottom: .2em;
+}
+.meta_right {
+	float:right;
+	text-align:right;
+	font-size:small;
+}

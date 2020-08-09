@@ -1,0 +1,91 @@
+
+####
+####	    Lunch Voting System
+####
+####	Mitchell Barry, Darin Kleb
+####
+
+Thank you for your interest in the installation
+of the lunch voting system (tm)(r).
+
+1.  INSTALLATION
+===========================
+
+Typical installation of Lunch Voting System uses
+MySQL database. Other than that, ensure your web
+host has PHP 5.3+ installed. Drop the associated
+files in your web-hosted folder, and you're good
+to go.
+
+
+2.  CONFIGURATION
+===========================
+
+Once your MySQL database is configured, you'll
+need to add an administrator user account. This
+should be added to installation script and will
+be good to go.
+
+User maintenance should be self-service, and
+will email out to administrators for new account
+registration approvals.
+
+This system depends on being able to send mail
+from PHP. Please be sure this is configured for
+proper workflow to execute.
+
+If an entry in restaurant table is inserted with 
+a password of 'oursecret' (md5 hashed), then that 
+restaurant is the "override" choice regardless 
+of what was voted by other users.
+
+2.1 CRON CONFIGURATION
+===========================
+
+This application relies heavily on cron to update
+itself every week. You'll want 4 different cron
+schedules set for this application. The first
+is to randomize lunch selections for the week by
+overwriting index.php with a generated file from
+the perl script. The second will email users to
+vote before it closes. The third will
+close voting polls, and email all registered
+users the results. The fourth will simply reset
+the pages so that new users will just see a simple
+message instead of poll results.
+
+# 1 start runs at 7AM
+0 7 * * 5 /web/cgi-bin/php5 "/full/path/to/start.php"
+# 2 reminder runs at 8AM
+0 8 * * 5 /web/cgi-bin/php5 "/full/path/to/reminder.php"
+# 3 results runs at 11AM
+0 11 * * 5 /web/cgi-bin/php5 "/full/path/to/results.php"
+# 4 end runs at 2PM
+0 14 * * 5 /web/cgi-bin/php5 "/full/path/to/end.php"
+
+
+3.  LICENSE
+===========================
+
+
+The MIT License (MIT)
+
+Copyright (c) 2010 Mitchell Barry, Darin Kleb
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.

@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   lvs-php:
     image: lvs-php
@@ -16,17 +16,15 @@ services:
       - 8080:80
     restart: always
   lvs-data:
-    image: mysql:5.7.21
+    image: mysql:5.7
     volumes:
       - ./:/app
-      - dbdata/lib/mysql
-      - ./db/init:/docker-entrypoint-initdb.d/:ro
+      - ./db:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d/:ro
     environment:
-      - MYSQL_DATABASE=lunch_voting_system
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=lvs
-      - MYSQL_PASSWORD=lvs
+      MYSQL_DATABASE: lunch_voting_system
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: lvs
+      MYSQL_PASSWORD: lvs
     working_dir: /app
     restart: always
-volumes:
-  dbdata:

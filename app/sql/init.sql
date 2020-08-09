@@ -4,6 +4,7 @@ GRANT ALL PRIVILEGES ON lunch_voting_system.* TO 'lvs'@'localhost' IDENTIFIED BY
 USE lunch_voting_system
 
 CREATE TABLE restaurant (
+    id INT(11) AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     pin CHAR(32) NOT NULL
 );

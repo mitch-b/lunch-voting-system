@@ -39,6 +39,11 @@ docker ps
   chmod 777 ./app/lastweek.php
   chmod 777 ./app/restaurant.pl
   ```
+- Cron container runs schedule on **Fridays**:
+  - Sets up index page at **7AM** with fresh **voting options**
+  - Sends **reminder email** to all registered users at **8AM**
+  - Sends **vote results** at **11AM**
+  - Resets the index page at **2PM** to indicate voting is over and to **wait until next week**.
 
 ## To Do
 - Update cronjob to appropriate scripts/timings

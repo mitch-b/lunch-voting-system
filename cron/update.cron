@@ -1,1 +1,14 @@
-* * * * * curl lvs-web/start.php > /app/cron-out.txt
+# demo, every minute update index.php voting options
+# * * * * * curl lvs-web/start.php > /app/cron-out.txt
+
+# 1 start runs at 7AM on Friday (5)
+0 7 * * 5 curl lvs-web/start.php
+
+# 2 reminder runs at 8AM on Friday (5)
+0 8 * * 5 curl lvs-web/reminder.php
+
+# 3 results runs at 11AM on Friday (5)
+0 11 * * 5 curl lvs-web/results.php
+
+# 4 end runs at 2PM on Friday (5)
+0 14 * * 5 curl lvs-web/end.php

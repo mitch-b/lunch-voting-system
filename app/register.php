@@ -1,5 +1,6 @@
 <?php
 require_once("mysql.php");
+require_once("include/smtp.settings.php");
 
 $action = $_GET['action'];
 
@@ -42,11 +43,28 @@ if ($action == "add") {
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 
 		$to = "mitch.barry+lvs@gmail.com";
-		$from = "from: Pin Verification Service <lunch@mg.mitchbarry.com>";
+		$from = "Pin Verification Service <lunch@mg.mitchbarry.com>";
 		$subject = "PIN Registration Approval Needed for " . $name;
 		$msg = "A PIN request has been placed by " . $name . ".\n\nPlease go to http://localhost:8080/approve.php?id=" . $row['id'] . "&pass=oursecret to approve/deny request.";
-		mail($to, $subject, $msg, $from);
-		header("Location: register.php?action=pending");
+
+		// 2020: needed slight refactor
+		// mail($to, $subject, $msg, $from);
+
+		$content = "text/html; charset=utf-8";
+		$mime = "1.0";
+		$headers = array(
+			'From' => $from,
+			'To' => $to,
+			'Subject' => $subject,
+			'MIME-Version' => $mime,
+			'Content-type' => $content
+		);
+		$mail = $smtp->send($to, $headers, $msg);
+		if (PEAR::isError($mail)) {
+			echo ("<p>" . $mail->getMessage() . "</p>");
+		} else {
+			header("Location: register.php?action=pending");
+		}
 	}
 } else if ($action == "verify") {
 	$pass = md5($_GET['confirmation']);

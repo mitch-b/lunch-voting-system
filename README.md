@@ -32,7 +32,7 @@ docker ps
   - Admin Pass: `admin`
   - Fun non-admin User: `user`
   - Fun non-admin Pass: `user`
-- I had issues with `/start.php` not writing the `index.php` file out. 
+- I had issues with `/start.php` not writing the `index.php` file out. This impacts cron job not writing new `index.php` as well, of course.
   ```bash
   # security be damned
   chmod 777 ./app/index.php

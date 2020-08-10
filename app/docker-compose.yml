@@ -4,6 +4,11 @@ services:
     image: lvs-php
     volumes:
       - ./:/app
+    environment:
+      MAIL_HOST: 'smtp.mailgun.com'
+      MAIL_PORT: '587'
+      MAIL_USER: ''
+      MAIL_PASS: ''
     working_dir: /app
     restart: always
   lvs-web:

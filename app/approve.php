@@ -1,5 +1,6 @@
 <?php
 require_once("mysql.php");
+require_once("include/smtp.settings.php");
 
 $action = $_GET['action'];
 
@@ -29,10 +30,27 @@ if ($_GET['pass'] == "oursecret") {
 		$stmt->execute(['APPROVED', $pass, $id]);
 
 		$subject = "PIN Approved";
-		$from = "from: PIN Service Request <lunch@mg.mitchbarry.com>";
+		$from = "PIN Service Request <lunch@mg.mitchbarry.com>";
 		$msg = "Your request for a PIN is approved. Set your pin at http://localhost:8080/setpin.php?id=" . $id . "&confirmation=" . $password;
-		mail($email, $subject, $msg, $from);
-		header("Location: approve.php?action=approved");
+		
+		// 2020: needed slight refactor
+		// mail($email, $subject, $msg, $from);
+
+		$content = "text/html; charset=utf-8";
+		$mime = "1.0";
+		$headers = array(
+			'From' => $from,
+			'To' => $email,
+			'Subject' => $subject,
+			'MIME-Version' => $mime,
+			'Content-type' => $content
+		);
+		$mail = $smtp->send($email, $headers, $msg);
+		if (PEAR::isError($mail)) {
+			echo ("<p>" . $mail->getMessage() . "</p>");
+		} else {
+			header("Location: approve.php?action=approved");
+		}
 	} else if ($action == "deny") {
 		// 2020: needed slight refactor
 		// mysql_query("DELETE FROM users WHERE id = '$id'");
@@ -42,11 +60,28 @@ if ($_GET['pass'] == "oursecret") {
 		$stmt->execute([$id]);
 
 		$subject = "PIN Denied";
-		$from = "from: PIN Service Request <lunch@mg.mitchbarry.com>";
+		$from = "PIN Service Request <lunch@mg.mitchbarry.com>";
 		$msg = "Your request for a PIN has been denied. Abuse of the system is not tolerated. If you feel this is a mistake, ";
 		$msg .= "please contact Mitch and Darin.";
-		mail($email, $subject, $msg, $from);
-		header("Location: approve.php?action=denied");
+
+		// 2020: needed slight refactor
+		// mail($email, $subject, $msg, $from);
+
+		$content = "text/html; charset=utf-8";
+		$mime = "1.0";
+		$headers = array(
+			'From' => $from,
+			'To' => $email,
+			'Subject' => $subject,
+			'MIME-Version' => $mime,
+			'Content-type' => $content
+		);
+		$mail = $smtp->send($email, $headers, $msg);
+		if (PEAR::isError($mail)) {
+			echo ("<p>" . $mail->getMessage() . "</p>");
+		} else {
+			header("Location: approve.php?action=denied");
+		}
 	}
 } else if ($action != "approved" && $action != "denied")
 	header("Location: index.php");

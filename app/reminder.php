@@ -25,7 +25,7 @@
 	// $headers = "From:$type Lunch <lunch@mg.mitchbarry.com>" . "\r\n";
 	// $headers .= 'Cc: ';
 
-	$cc_recipients = '';
+	$bcc_recipients = '';
     if ( $thismonth == $nextmonth )
 	{		
 		$sql = "SELECT email, frequency FROM users WHERE frequency='W'";

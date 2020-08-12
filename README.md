@@ -10,6 +10,8 @@ Original source with very minor adjustments to run in containers.
 
 https://www.vultr.com/docs/deploy-a-php-application-using-docker-compose
 
+## Running
+
 ```bash
 # pwd: repository root
 
@@ -22,6 +24,16 @@ docker-compose up -d
 docker ps
 
 # http://localhost:8080/
+```
+
+### Running with Send Mail
+
+Any SMTP service should work, but replace the environment variables in the [`docker-compose.yml`](./app/docker-compose.yml) file with your appropriate settings. Alternatively, to set these variables from the command line, follow this syntax:
+
+```bash
+export MAIL_USER=myuser@mydomain.com
+export MAIL_PASS=abcdefghijklmnop
+docker-compose up -d
 ```
 
 ## Notes

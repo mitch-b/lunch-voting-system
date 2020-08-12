@@ -58,11 +58,9 @@ docker-compose up -d
   - Resets the index page at **2PM** to indicate voting is over and to **wait until next week**.
 
 ## To Do
-- Update cronjob to appropriate scripts/timings
-- Restaurants pulled from database instead of text files would obviously be better.
 - Environment variables for all configuration options preferred.
+- Restaurants pulled from database instead of text files would obviously be better.
 - One-off container building required to run services should be streamlined as well.
-- Update to mailgun sendmail
 
 ## Debugging
 

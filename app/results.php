@@ -1,6 +1,8 @@
 <?php
 // connect to the database
 include('mysql.php');
+// pull $smtp and mail config
+require_once("include/smtp.settings.php");
 
 // 2020: needed slight refactor
 // $sql = "SELECT DISTINCT name FROM restaurant";
@@ -18,7 +20,7 @@ $arr = array(
 );
 // 2020: needed slight refactor
 // while ($row = mysql_fetch_assoc($result)) {
-while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	// 2020: needed slight refactor
 	// $sql2 = "SELECT * FROM restaurant WHERE name='" .
 	// 	  mysql_real_escape_string($row['name']) . "'";
@@ -58,18 +60,41 @@ $mesg = "
     </div>
     </body>
 </html>";
-$headers = "From:$type Lunch Notifier <lunch@mg.mitchbarry.com>" . "\r\n";
-$headers .= "Content-type: text/html\r\n";
-$headers .= 'Cc: ';
+// 2020: needed slight refactor
+// $headers = "From:$type Lunch Notifier <lunch@mg.mitchbarry.com>" . "\r\n";
+// $headers .= "Content-type: text/html\r\n";
+// $headers .= 'Cc: ';
+$bcc_recipients = '';
 if ($thismonth == $nextmonth) {
 	$sql = "SELECT email, frequency FROM users WHERE frequency='W'";
-	$headers .= get_emails($sql);
+	// $headers .= get_emails($sql);
+	$bcc_recipients = get_emails($sql);
 } else {
 	$sql = "SELECT email, frequency FROM users WHERE frequency='W' OR frequency='M'";
-	$headers .= get_emails($sql);
+	// $headers .= get_emails($sql);
+	$bcc_recipients = get_emails($sql);
 }
 $subject = "Lunch this week: $winner";
-mail("lunch@mg.mitchbarry.com", $subject, $mesg, $headers);
+
+// 2020: needed slight refactor
+// mail("lunch@mg.mitchbarry.com", $subject, $mesg, $headers);
+
+$content = "text/html; charset=utf-8";
+$mime = "1.0";
+$to = "lunch@mg.mitchbarry.com";
+$from = "$type Lunch <lunch@mg.mitchbarry.com>";
+$headers = array(
+	'From' => $from,
+	'To' => $to,
+	'Subject' => $subject,
+	'MIME-Version' => $mime,
+	'Content-type' => $content
+);
+$mail = $smtp->send($to . "," . $bcc_recipients, $headers, $mesg);
+if (PEAR::isError($mail)) {
+	echo ("<p>" . $mail->getMessage() . "</p>");
+}
+
 echo nl2br($mesg);
 
 function get_emails($sql)
@@ -82,8 +107,7 @@ function get_emails($sql)
 	$emls = '';
 
 	$result = $db->query($sql);
-	while($data = $result->fetch(PDO::FETCH_ASSOC))
-	{
+	while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
 		if ($emls != '') {
 			$emls .= ", ";
 		}

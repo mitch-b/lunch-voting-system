@@ -1,4 +1,5 @@
 # demo, every minute update index.php voting options
+# uncomment this entry to see demo cron working
 # * * * * * curl lvs-web/start.php > /app/cron-out.txt
 
 # 1 start runs at 7AM on Friday (5)

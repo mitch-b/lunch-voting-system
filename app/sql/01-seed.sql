@@ -12,7 +12,3 @@ VALUES
     (1, 'administrator'),
     (1, 'lvs_admin'),
     (2, 'lvs_standard');
-
-INSERT INTO `lunch_voting_system`.`users` (`name`, `email`, `frequency`, `status`)
-VALUES 
-    ('Mitchell Barry', 'mitch.barry+lvs@gmail.com', 'W', 'ACTIVE')

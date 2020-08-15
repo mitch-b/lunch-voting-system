@@ -1,19 +1,15 @@
 <?php
 
 require_once('Mail.php');
-
-$host = getenv('MAIL_HOST');
-$username = getenv('MAIL_USER');
-$password = getenv('MAIL_PASS');
-$port = getenv('MAIL_PORT');
+require_once('env.php');
 
 $params = array(
-    'host' => $host,
-    'port' => $port,
+    'host' => $mailhost,
+    'port' => $mailport,
     'auth' => true,
     'socket_options' => array('ssl' => array('verify_peer_name' => false, 'allow_self_signed' => true)),
-    'username' => $username,
-    'password' => $password
+    'username' => $mailuser,
+    'password' => $mailpass
 );
 
 $smtp = Mail::factory('smtp', $params);

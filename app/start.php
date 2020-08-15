@@ -1,6 +1,9 @@
 <?php
+  // environment variables
+  require_once 'include/env.php';
 	// connect to database
-	require_once 'mysql.php';
+  require_once 'mysql.php';
+  
 	echo "truncating table..........";
 	$sql = "TRUNCATE TABLE restaurant";
 
@@ -22,5 +25,5 @@
 	exec($run, $output);
 	echo print_r($output);
 	echo nl2br("done\n\n");
-	echo "<a href='http://localhost:8080/'>vote for lunch</a>";
+	echo "<a href='$hostname'>vote for lunch</a>";
 ?>

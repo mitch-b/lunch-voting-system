@@ -5,10 +5,13 @@ services:
     volumes:
       - ./:/app
     environment:
-      MAIL_HOST: 'smtp.mailgun.com'
-      MAIL_PORT: '587'
+      MAIL_HOST: '${MAIL_HOST:-smtp.mailgun.com}'
+      MAIL_PORT: '${MAIL_PORT:-587}'
       MAIL_USER: '${MAIL_USER}'
       MAIL_PASS: '${MAIL_PASS}'
+      MAIL_FROM: '${MAIL_FROM}'
+      HOSTNAME: '${HOSTNAME:-http://localhost:8080}'
+      ADMIN_EMAIL: '${ADMIN_EMAIL}'
     working_dir: /app
     restart: always
   lvs-web:

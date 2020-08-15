@@ -1,6 +1,7 @@
 <?php
 require_once("mysql.php");
 require_once("include/smtp.settings.php");
+require_once('include/env.php');
 
 $action = $_GET['action'];
 
@@ -30,8 +31,8 @@ if ($_GET['pass'] == "oursecret") {
 		$stmt->execute(['APPROVED', $pass, $id]);
 
 		$subject = "PIN Approved";
-		$from = "PIN Service Request <lunch@mg.mitchbarry.com>";
-		$msg = "Your request for a PIN is approved. Set your pin at http://localhost:8080/setpin.php?id=" . $id . "&confirmation=" . $password;
+    $from = "PIN Service Request <$mailfrom>";
+		$msg = "Your request for a PIN is approved. Set your pin at $hostname/setpin.php?id=" . $id . "&confirmation=" . $password;
 		
 		// 2020: needed slight refactor
 		// mail($email, $subject, $msg, $from);
@@ -60,7 +61,7 @@ if ($_GET['pass'] == "oursecret") {
 		$stmt->execute([$id]);
 
 		$subject = "PIN Denied";
-		$from = "PIN Service Request <lunch@mg.mitchbarry.com>";
+		$from = "PIN Service Request <$mailfrom>";
 		$msg = "Your request for a PIN has been denied. Abuse of the system is not tolerated. If you feel this is a mistake, ";
 		$msg .= "please contact Mitch and Darin.";
 

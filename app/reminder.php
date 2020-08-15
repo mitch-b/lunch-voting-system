@@ -1,17 +1,20 @@
 <?php
-	$mesg = "
+
+  require_once('include/env.php');
+
+  $mesg = "
 <html>
     <body style=\"font-family:Corbel,Tahoma,Arial;\">
     <div style=\"padding:15px;\">
         <center><b>Lunch Reminder</b></center>
-        <p>Please head to <a href='http://localhost:8080'>the lunch page</a> to vote for lunch.</p>
+        <p>Please head to <a href='$hostname'>the lunch page</a> to vote for lunch.</p>
 	<p>You have until 12:00PM Central to complete this action.</p>
 	<p><em><strong>Reminder:</strong></em> Don't forget to complete your CATS for the week!</p>
     </div>
     </body>
 </html>
 ";
-	require_once('mysql.php');
+  require_once('mysql.php');
 	
 	$days = 7;
 	$thismonth = date("M", time());
@@ -46,8 +49,8 @@
 	require_once("include/smtp.settings.php");
 	$content = "text/html; charset=utf-8";
 	$mime = "1.0";
-	$to = "lunch@mg.mitchbarry.com";
-	$from = "$type Lunch <lunch@mg.mitchbarry.com>";
+	$to = "$mailfrom";
+	$from = "$type Lunch <$mailfrom>";
 	$headers = array(
 		'From' => $from,
 		'To' => $to,

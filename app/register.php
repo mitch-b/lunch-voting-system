@@ -1,5 +1,6 @@
 <?php
 require_once("mysql.php");
+require_once('include/env.php');
 require_once("include/smtp.settings.php");
 
 $action = $_GET['action'];
@@ -42,10 +43,10 @@ if ($action == "add") {
 		$result = $db->query($query);
 		$row = $result->fetch(PDO::FETCH_ASSOC);
 
-		$to = "mitch.barry+lvs@gmail.com";
-		$from = "Pin Verification Service <lunch@mg.mitchbarry.com>";
+		$to = "$adminemail";
+		$from = "Pin Verification Service <$mailfrom>";
 		$subject = "PIN Registration Approval Needed for " . $name;
-		$msg = "A PIN request has been placed by " . $name . ".\n\nPlease go to http://localhost:8080/approve.php?id=" . $row['id'] . "&pass=oursecret to approve/deny request.";
+		$msg = "A PIN request has been placed by " . $name . ".\n\nPlease go to $hostname/approve.php?id=" . $row['id'] . "&pass=oursecret to approve/deny request.";
 
 		// 2020: needed slight refactor
 		// mail($to, $subject, $msg, $from);

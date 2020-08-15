@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once('../../mysql.php');
+require_once('../../include/env.php');
+
 $tbl_name = "account";
 // username and password sent from form 
 $username = $_POST['username'];
@@ -37,7 +39,7 @@ if ($stmt->rowCount() == 1) {
 	$stmt = $db->prepare($query);
 	$stmt->execute([$_SERVER['REMOTE_ADDR'], $username]);
 
-	header("location: http://localhost:8080/");
+	header("location: $hostname");
 } else {
 	echo "wrong username/password";
 }

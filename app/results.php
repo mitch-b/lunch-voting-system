@@ -1,4 +1,6 @@
 <?php
+// pull environment variables
+include('include/env.php');
 // connect to the database
 include('mysql.php');
 // pull $smtp and mail config
@@ -81,8 +83,8 @@ $subject = "Lunch this week: $winner";
 
 $content = "text/html; charset=utf-8";
 $mime = "1.0";
-$to = "lunch@mg.mitchbarry.com";
-$from = "$type Lunch <lunch@mg.mitchbarry.com>";
+$to = "$mailfrom";
+$from = "$type Lunch <$mailfrom>";
 $headers = array(
 	'From' => $from,
 	'To' => $to,

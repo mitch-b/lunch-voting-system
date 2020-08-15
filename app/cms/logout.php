@@ -1,5 +1,6 @@
 <?php
 	session_start();
-	session_destroy();
-	header("Location: http://localhost:8080/");
+  session_destroy();
+  require_once '../include/env.php';
+	header("Location: $hostname");
 ?>

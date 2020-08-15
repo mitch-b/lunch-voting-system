@@ -19,6 +19,12 @@ docker build -t lvs-php php/
 docker build -t lvs-nginx nginx/
 docker build -t lvs-cron cron/
 cd app/
+
+# set hostname for links in app
+# default is http://localhost:8080
+# export HOSTNAME=https://lvs.domain.com
+
+# confirm host port in docker-compose.yml...
 docker-compose up -d
 
 docker ps
@@ -31,8 +37,12 @@ docker ps
 Any SMTP service should work, but replace the environment variables in the [`docker-compose.yml`](./app/docker-compose.yml) file with your appropriate settings. Alternatively, to set these variables from the command line, follow this syntax:
 
 ```bash
+# macos, linux
+export MAIL_FROM=lunch@domain.com
 export MAIL_USER=myuser@mydomain.com
 export MAIL_PASS=abcdefghijklmnop
+export ADMIN_EMAIL=admin@domain.com
+
 docker-compose up -d
 ```
 

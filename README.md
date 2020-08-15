@@ -48,7 +48,7 @@ docker-compose up -d
 
 ## Notes
 - So many SQL injection vulnerabilities!
-- Had to update all `mysql` calls to use [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) instead. 
+- Had to update all `mysql` calls to use [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) instead. Apparently the `mysql` calls were deprecated years ago... 
 - The _Lunch Voting System_ had some integration with a CMS system hosted on mitchbarry.com - administrators of the _Lunch Voting System_ needed a user created in that system. To self-contain, that user administration has moved to the same mysql database that the application depends on. 
   - Admin User: `admin`
   - Admin Pass: `admin`
@@ -68,7 +68,6 @@ docker-compose up -d
   - Resets the index page at **2PM** to indicate voting is over and to **wait until next week**.
 
 ## To Do
-- Environment variables for all configuration options preferred.
 - Restaurants pulled from database instead of text files would obviously be better.
 - One-off container building required to run services should be streamlined as well.
 

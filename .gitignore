@@ -1,2 +1,4 @@
+# mysql volume mount
 app/db/*
-cron-out.txt
+# docker-compose environment variables
+app/.env

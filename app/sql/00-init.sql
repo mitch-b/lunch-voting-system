@@ -4,10 +4,17 @@ GRANT ALL PRIVILEGES ON lunch_voting_system.* TO 'lvs'@'localhost' IDENTIFIED BY
 
 USE lunch_voting_system;
 
+
+CREATE TABLE pins (
+    `pin` CHAR(32) NOT NULL,
+    PRIMARY KEY (`pin`)
+);
+
 CREATE TABLE restaurant (
     `pin` CHAR(32) NOT NULL,
     `name` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (`pin`)
+    PRIMARY KEY (`pin`),
+    FOREIGN KEY (`pin`) REFERENCES pins(`pin`)
 );
 
 -- ported from mitchbarry.cms "users" now called 'account'
@@ -29,11 +36,6 @@ CREATE TABLE users (
     `frequency` VARCHAR(1) NOT NULL DEFAULT 'W',
     `status` VARCHAR(20) DEFAULT 'NOT_SETUP',
     PRIMARY KEY (`id`)
-);
-
-CREATE TABLE pins (
-    `pin` VARCHAR(255) NOT NULL,
-    PRIMARY KEY (`pin`)
 );
 
 CREATE TABLE groups (

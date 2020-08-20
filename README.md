@@ -4,6 +4,10 @@ Created by Mitchell Barry and Darin Kleb in 2010.
 
 Purpose: Help a rag-tag group of interns decide where to eat lunch on Friday each week. 
 
+![voting example](.docs/voting.png)
+
+![voting results example](.docs/voting-results.png)
+
 Original source with very minor adjustments to run in containers and allow configuration.
 
 [This tutorial](https://www.vultr.com/docs/deploy-a-php-application-using-docker-compose) was used to get started.

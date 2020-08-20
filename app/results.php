@@ -30,7 +30,7 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
 	// $num = mysql_num_rows($result2);
 
 	$sql2 = "SELECT * FROM restaurant WHERE name=" . $db->quote($row['name']);
-	$result3 = $db->query($sql2);
+	$result2 = $db->query($sql2);
 	$num = $result2->rowCount();
 
 	$arr[$i]["name"] = $row['name'];

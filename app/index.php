@@ -1,6 +1,5 @@
 <?php
   session_start();
-  require_once('include/env.php');
 	include("mysql.php");
 	// check if already voted ...
 	if(isset($_COOKIE['user']))
@@ -75,7 +74,7 @@
 			}
 			else
 			{
-        $pin = md5($_POST['pin']);
+        		$pin = md5($_POST['pin']);
 
 				// 2020: needed slight refactor
 				// $choice = mysql_real_escape_string($_POST['choice']);
@@ -139,9 +138,9 @@
     	<h3>Place vote for lunch location:</h3>
         <div class="meta">Locations have been generated randomly for an exciting lunch every time!</div><br />
         <form method="post" action="<?php $_SERVER['PHP_SELF']; ?>"><table class="lunchtable"><tr>
-        	<td rowspan="2"><input type="radio" name="choice" value="IHOP" />IHOP                                              
-        	<br /><input type="radio" name="choice" value="Runza" />Runza                                              
-        	<br /><input type="radio" name="choice" value="Applebees" />Applebees                                              
+        	<td rowspan="2"><input type="radio" name="choice" value="Godfathers Pizza" />Godfathers Pizza                                              
+        	<br /><input type="radio" name="choice" value="Hong Hing" />Hong Hing                                              
+        	<br /><input type="radio" name="choice" value="Subway" />Subway                                              
                 </td><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;Pin: <input name="pin" type="password" maxlength="32"/>
 		</td></tr><tr><td align="right">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="Submit Lunch Vote" />
         </td></tr></table></form>

@@ -74,7 +74,7 @@
 			}
 			else
 			{
-        $pin = md5($_POST['pin']);
+        		$pin = md5($_POST['pin']);
 
 				// 2020: needed slight refactor
 				// $choice = mysql_real_escape_string($_POST['choice']);

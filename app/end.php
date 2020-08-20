@@ -9,7 +9,7 @@
 <title>Lunch Voting System | powered by mitchbarry.com</title>
 </head>
 <body>
-<div id=\"container\">" . '<?php include("./include/left_column.php"); ?>' . "<div id='vote'><p>Polling period has expired. Wait until 7AM CST Friday.</p></div><a href='manage.php' class='meta_right'>manage lunch system</a></div></body></html>";
+<div id=\"container\">" . '<?php include("./include/left_column.php"); ?>' . "<div id='vote'><p>Polling period has expired. Wait until 7AM CST Friday.</p><a href='register.php'>Register for a PIN</a></div><a href='manage.php' class='meta_right'>manage lunch system</a></div></body></html>";
 	exec("cp index.php lastweek.php");
 	$index = "index.php";
 	$filehandler = fopen($index,'w');
